@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FirstScreen: UITableViewController {
+class SearchScreen: UITableViewController {
 
     let cities = ["Brno", "Ottawa"]
     override func viewDidLoad() {
@@ -18,7 +18,7 @@ class FirstScreen: UITableViewController {
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
                 navigationItem.standardAppearance = appearance
                 navigationItem.scrollEdgeAppearance = appearance
-        title = "First Screen"
+        title = "Weather"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -42,7 +42,10 @@ class FirstScreen: UITableViewController {
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+       return "Search weather in some interesting place"
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -91,6 +94,23 @@ class FirstScreen: UITableViewController {
              destinationVC.selectedCity = cities[indexPath.row]
          }
      }
+
     
 
+}
+
+//MARK: - SearchBar methods
+
+extension SearchScreen: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //tady se bude hledat
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
 }
