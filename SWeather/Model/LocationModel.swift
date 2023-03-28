@@ -11,4 +11,5 @@ import Foundation
 struct LocationModel {
     let key: Int
     let name: String
+    let country: String
 }

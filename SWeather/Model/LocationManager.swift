@@ -1,5 +1,5 @@
 //
-//  WeatherManager.swift
+//  LocationManger.swift
 //  SWeather
 //
 //  Created by Marcel Mravec on 26.03.2023.
@@ -25,13 +25,14 @@ struct LocationManager {
         performRequest(with: urlString)
     }
     
+// http://dataservice.accuweather.com/locations/v1/cities/geoposition/search
+    
     func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil {
                     delegate?.didFailedWithError(error: error!)
-                    print("Chyba dekodování..")
                     return
                 }
                 if let safeData = data {
@@ -53,11 +54,11 @@ struct LocationManager {
             for loc in decodedData {
                 let id = loc.Key
                 let name = loc.LocalizedName
-                let location = LocationModel(key: Int(id) ?? 0, name: name)
+                let country = loc.Country.LocalizedName
+                let location = LocationModel(key: Int(id) ?? 0, name: name, country: country)
                 
                 arrayOfLocations.append(location)
             }
-            print(arrayOfLocations)
             return arrayOfLocations
             
         } catch {

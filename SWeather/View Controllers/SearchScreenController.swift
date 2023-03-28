@@ -14,7 +14,7 @@ class SearchScreenController: UITableViewController {
     var locationManager = LocationManager()
     
     var cities = [LocationModel]()
-//    let brno = LocationModel(key: 1, name: "Brno")
+
     
     
     
@@ -58,7 +58,7 @@ class SearchScreenController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = cities[indexPath.row].name + String(cities[indexPath.row].key)
+        cell.textLabel?.text = "\(cities[indexPath.row].name), \(String(cities[indexPath.row].key)),  \(cities[indexPath.row].country)"
 
         return cell
     }
@@ -77,7 +77,7 @@ class SearchScreenController: UITableViewController {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          let destinationVC = segue.destination as! DetailScreenController
          if let indexPath = tableView.indexPathForSelectedRow {
-             destinationVC.selectedCity = cities[indexPath.row].name
+             destinationVC.selectedLocation = cities[indexPath.row]
          }
      }
 
