@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct K {
-    static let appName = ""
+enum K {
+//    static let appName = ""
     static let apiKey = "7AJyfBYhwaMWIXRBQsvo9jP6gtseoqlx"
     static let cellIdentifier = "cityCell"
     

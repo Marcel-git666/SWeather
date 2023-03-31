@@ -13,6 +13,7 @@ class DetailScreenController: UIViewController {
     var weatherManager = WeatherManager()
     var mobLink = ""
     
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var cityName: UILabel!
@@ -31,11 +32,11 @@ class DetailScreenController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Temp details for: \(selectedLocation?.name ?? "Unknown location")"
+        title = "Temperature details"
         cityName.text = selectedLocation?.name
         print(selectedLocation)
         weatherManager.delegate = self
-        weatherManager.fetchWeather(cityKey: String(selectedLocation?.key ?? 1))
+        weatherManager.fetchWeather(cityKey: String(selectedLocation?.key ?? 123248))
     }
     
     
@@ -61,9 +62,10 @@ extension DetailScreenController: WeatherManagerDelegate {
             self.apparentTemperature.text = String(weather.apparentTemperature)
             self.visibilityLabel.text = String(weather.visibility)
             self.humanDecriptionLabel.text = weather.weatherText
-            self.precipitationTypeLabel.text = weather.precipitationType ?? "Neither raining nor snowing."
+            self.precipitationTypeLabel.text = weather.precipitationType ?? "No rain/snow"
             let image = UIImage(named: "\(String(format: "%02d", weather.weatherIcon))-s.png")
             self.weatherIcon.image = image
+            self.timeLabel.text = weather.dateTime
         }
     }
     

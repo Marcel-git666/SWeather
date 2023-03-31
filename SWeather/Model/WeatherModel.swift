@@ -18,13 +18,14 @@ struct WeatherModel {
     let apparentTemperature: Double
     let visibility: Double
     
-    var conditionName: String {
-        switch weatherIcon {
-        case 1:
-            return "01-s.png"
-            
-        default:
-            return "02-s.png"
-        }
+    var dateTime: String {
+        let componets = date.split(separator: "T")
+        let dateComponents = componets[0].split(separator: "-")
+        let timeComponents = componets[1].split(separator: ":")
+        let finalDateAndTime = "\(dateComponents[2]).\(dateComponents[1]).\(dateComponents[0]) - \(timeComponents[0]):\(timeComponents[1])"
+
+        print(finalDateAndTime)
+
+        return finalDateAndTime
     }
 }
